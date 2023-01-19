@@ -22,7 +22,6 @@ fclean : clean
 	make fclean -C libft
 
 clean :
-	$(RM) $(NAME)
 	make clean -C libft
 
 re : fclean all

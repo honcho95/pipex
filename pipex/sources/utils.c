@@ -6,8 +6,6 @@ void	error(char *str)
 	exit(EXIT_FAILURE);
 }
 
-/* Function that will look for the path line inside the environment, will
- split and test each command path and then return the right one. */
 char	*get_path(char *cmd, char **env)
 {
 	char	**all_paths;
@@ -16,9 +14,9 @@ char	*get_path(char *cmd, char **env)
 	char	*slash;
 
 	i = 0;
-	while (ft_strnstr(env[i], "PATH", 4) == 0) // find "PATH" 
+	while (ft_strnstr(env[i], "PATH", 4) == 0)
 		i++;
-	all_paths = ft_split(env[i] + 5, ':'); // +5 is to start after "PATH:"
+	all_paths = ft_split(env[i] + 5, ':');
 	i = 0;
 	if(cmd[0] == '.')
 	{
@@ -27,10 +25,10 @@ char	*get_path(char *cmd, char **env)
     }
 	while (all_paths[i])
 	{
-		slash = ft_strjoin(all_paths[i], "/"); // add slash for proper path
-		path = ft_strjoin(slash, cmd); // add the command
+		slash = ft_strjoin(all_paths[i], "/");
+		path = ft_strjoin(slash, cmd); 
 		free(slash);
-		if (access(path, F_OK | X_OK) == 0) // verify if it exists
+		if (access(path, F_OK | X_OK) == 0)
 			return (path);
 		free(path);
 		i++;
@@ -42,9 +40,6 @@ char	*get_path(char *cmd, char **env)
 	return (0);
 }
 
-
-/* Function that take the command and send it to find_path
- before executing it. */
 void	end_process(char *av, char **env)
 {
 	char	**cmd;
